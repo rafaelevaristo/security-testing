@@ -7,7 +7,6 @@ RUN apk add --no-cache \
     ca-certificates \
     grep \
     sed \
-    awk \
     coreutils
 
 WORKDIR /app
