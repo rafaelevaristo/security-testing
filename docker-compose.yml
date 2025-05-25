@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  security-tester:
+    build: .
+    container_name: security-tester
+    volumes:
+      - ./logs:/app/logs
+      - ./reports:/app/reports
+      - ./config.conf:/app/config.conf:ro
+    environment:
+      - TZ=UTC
+
+  report-server:
+    image: nginx:alpine
+    container_name: security-reports
+    ports:
+      - "8080:80"
+    volumes:
+      - ./reports:/usr/share/nginx/html:ro
+    depends_on:
+      - security-tester
