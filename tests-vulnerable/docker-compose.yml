@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  juice-shop:
+    image: bkimminich/juice-shop
+    ports:
+      - "3000:3000"
+
+  dvwa:
+    image: vulnerables/web-dvwa
+    ports:
+      - "8080:80"
+    environment:
+      - MYSQL_USER=dvwa
+      - MYSQL_PASSWORD=dvwa
+      - MYSQL_DATABASE=dvwa
+      - MYSQL_ROOT_PASSWORD=root
+
+  vulnerable-nginx:
+    build: ./vulnerable-nginx
+    ports:
+      - "8081:80"
+      - "8443:443"
